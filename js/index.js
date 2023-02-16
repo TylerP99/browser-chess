@@ -19,7 +19,11 @@ class Board {
 
             for(let col = 0; col < 8; ++col) {
                 const color = (row%2 === col%2) ? "light" : "dark";
-                rowArr.push(new Square(color));
+                let piece = null;
+                if(row == 1 && col == 5) {
+                    piece = new Pawn("white");
+                }
+                rowArr.push(new Square(color, piece));
             }
             board.push(rowArr);
         }
@@ -70,6 +74,35 @@ class Square {
     getDisplay() {
         return this.display;
     }
+}
+
+class Pawn {
+    constructor(color = "white") {
+        this.hasMoved = false;
+        this.display = this.generate();
+    }
+
+    generate() {
+        const image = document.createElement("img");
+        image.classList.add("piece");
+        if(this.color == "white") {
+            image.src = "./assets/pawn-white.svg";
+        }
+        else {
+            image.src = "./assets/pawn-black.svg";
+        }
+
+        return image;
+    }
+
+    getDisplay() {
+        return this.display;
+    }
+
+    calculateValidMoves(x, y) {
+        
+    }
+
 }
 
 const board = new Board();
