@@ -78,6 +78,7 @@ class Square {
 
 class Pawn {
     constructor(color = "white") {
+        this.color = color;
         this.hasMoved = false;
         this.display = this.generate();
     }
@@ -99,8 +100,8 @@ class Pawn {
         return this.display;
     }
 
-    calculateValidMoves(x, y) {
-        
+    calculateValidMoves(x, y, board) {
+        if()
     }
 
 }
