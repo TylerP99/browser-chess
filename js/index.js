@@ -1,5 +1,34 @@
 class ChessGame {
+    constructor() {
+        this.turn = 0;
+        this.board = new Board();
+        this.playerWhite = new Player();
+        this.playerBlack = new Player();
 
+        this.display = this.generateDisplay();
+    }
+
+    generateDisplay() {
+        const gameContainer = document.createElement("div");
+
+
+
+        return gameContainer;
+    }
+}
+
+class Player {
+    constructor(name = "Player") {
+        this.name = name;
+    }
+
+    setPlayerName(name) {
+        this.name = name;
+    }
+
+    getPlayerName() {
+        return this.name;
+    }
 }
 
 class Board {
@@ -101,7 +130,26 @@ class Pawn {
     }
 
     calculateValidMoves(x, y, board) {
-        if()
+        const direction = (white) ? 1 : -1;
+        const moves = [];
+
+        if(board[y+1*direction][x] === null) {
+            moves.push({x:x, y: y+1*direction});
+        }
+
+        if(board[y+2*direction][x] === null) {
+            moves.push({x: x, y: y+2*direction});
+        }
+
+        if(board[y+1*direction][x+1] !== null) {
+            moves.push({x:x+1, y:y+1*direction});
+        }
+
+        if(board[y+1*direction][x-1] !== null) {
+            moves.push({x:x-1, y:y+1*direction});
+        }
+
+        return moves;
     }
 
 }
