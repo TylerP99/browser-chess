@@ -1,33 +1,18 @@
+/*
+Game Loop
+ - Game initialized
+ -- Board initialized
+ -- Board drawn
+ - White Player makes a valid move
+ - Black Player makes a valid move
+ - Repeat above two steps until checkmate or stalemate
+ -- Checkmate: King and all valid moves are capturable
+ -- Stalemate: Only kings remain on board, move has been repeated a set number of times, or a player has no valid moves
+*/
+
 class ChessGame {
     constructor() {
-        this.turn = 0;
         this.board = new Board();
-        this.playerWhite = new Player();
-        this.playerBlack = new Player();
-
-        this.display = this.generateDisplay();
-    }
-
-    generateDisplay() {
-        const gameContainer = document.createElement("div");
-
-
-
-        return gameContainer;
-    }
-}
-
-class Player {
-    constructor(name = "Player") {
-        this.name = name;
-    }
-
-    setPlayerName(name) {
-        this.name = name;
-    }
-
-    getPlayerName() {
-        return this.name;
     }
 }
 
