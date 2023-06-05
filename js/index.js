@@ -147,4 +147,8 @@ class Bishop {
     constructor() {}
 }
 
+class Rook {
+    constructor() {}
+}
+
 const board = new Board();
