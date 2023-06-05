@@ -143,4 +143,8 @@ class Knight {
     constructor() {}
 }
 
+class Bishop {
+    constructor() {}
+}
+
 const board = new Board();
