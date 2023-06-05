@@ -139,4 +139,8 @@ class Pawn {
 
 }
 
+class Knight {
+    constructor() {}
+}
+
 const board = new Board();
