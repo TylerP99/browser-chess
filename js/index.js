@@ -151,4 +151,10 @@ class Rook {
     constructor() {}
 }
 
+class Queen {
+    constructor() {}
+}
+
+
+
 const board = new Board();
