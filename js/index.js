@@ -155,6 +155,8 @@ class Queen {
     constructor() {}
 }
 
-
+class King {
+    constructor() {}
+}
 
 const board = new Board();
