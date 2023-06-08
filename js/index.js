@@ -90,6 +90,10 @@ class Square {
     }
 }
 
+class Piece {
+    constructor() {}
+}
+
 class Pawn {
     constructor(color = "white") {
         this.color = color;
