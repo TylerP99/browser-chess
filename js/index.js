@@ -13,6 +13,8 @@ Game Loop
 class ChessGame {
     constructor() {
         this.board = new Board();
+        this.turn = "White";
+        this.turnNum = 0;
     }
 }
 
