@@ -18,6 +18,10 @@ class ChessGame {
     }
 }
 
+class Player {
+    constructor() {}
+}
+
 class Board {
     constructor() {
         this.data = []
