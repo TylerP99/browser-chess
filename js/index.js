@@ -7,7 +7,7 @@ Game Loop
  - Black Player makes a valid move
  - Repeat above two steps until checkmate or stalemate
  -- Checkmate: King and all valid moves are capturable
- -- Stalemate: Only kings remain on board, move has been repeated a set number of times, or a player has no valid moves
+ -- Stalemate: Insuffient material (only kings, king knight, etc), move has been repeated a set number of times, or a player has no valid moves
 */
 
 class ChessGame {
@@ -15,11 +15,14 @@ class ChessGame {
         this.board = new Board();
         this.turn = "White";
         this.turnNum = 0;
+        this.turnHistory;
     }
 }
 
 class Player {
-    constructor() {}
+    constructor(color = "white") {
+        this.color = color;
+    }
 }
 
 class Board {
