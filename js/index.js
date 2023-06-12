@@ -10,6 +10,18 @@ Game Loop
  -- Stalemate: Insuffient material (only kings, king knight, etc), move has been repeated a set number of times, or a player has no valid moves
 */
 
+const DEFAULT_BOARD = [
+    /* a    b    c    d    e    f    g    h */
+    [ "R", "N", "B", "Q", "K", "B", "N", "R" ], // 1
+    [ "P", "P", "P", "P", "P", "P", "P", "P" ], // 2
+    [ " ", " ", " ", " ", " ", " ", " ", " " ], // 3
+    [ " ", " ", " ", " ", " ", " ", " ", " " ], // 4
+    [ " ", " ", " ", " ", " ", " ", " ", " " ], // 5
+    [ " ", " ", " ", " ", " ", " ", " ", " " ], // 6
+    [ "p", "p", "p", "p", "p", "p", "p", "p" ], // 7
+    [ "r", "n", "b", "q", "k", "b", "n", "r"], // 8
+]
+
 class ChessGame {
     constructor() {
         this.board = new Board();
