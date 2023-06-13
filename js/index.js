@@ -87,7 +87,17 @@ class Board {
         return container;
     }
 
-    move() {}
+    move(target, destination) {
+        const piece = this.board[target.row][target.col];
+
+        // TODO: Verify move
+
+        this.board[target.row][target.col] = null;
+
+        this.board[destination.row][destination.col] = piece;
+
+        return true;
+    }
 }
 
 class Square {
