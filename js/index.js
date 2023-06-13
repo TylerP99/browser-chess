@@ -23,6 +23,7 @@ const DEFAULT_BOARD = [
 ]
 
 class ChessGame {
+    // Contains game meta data (for now, turn info and board info, control of main game loop)
     constructor() {
         this.board = new Board();
         this.turn = "White";
@@ -38,6 +39,7 @@ class Player {
 }
 
 class Board {
+    // Contains piece information, controls what can move and where
     constructor() {
         this.data = []
 
@@ -84,6 +86,8 @@ class Board {
 
         return container;
     }
+
+    move() {}
 }
 
 class Square {
