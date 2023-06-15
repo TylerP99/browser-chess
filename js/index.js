@@ -126,7 +126,9 @@ class Square {
 }
 
 class Piece {
-    constructor() {}
+    constructor(color) {
+        this.color = color;
+    }
 }
 
 class Pawn {
