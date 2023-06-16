@@ -48,7 +48,7 @@ class Board {
         this.display = this.render();
     }
 
-    generate() {
+    generate(boardString) {
         const board = [];
 
         for(let row = 0; row < 8; ++row) {
