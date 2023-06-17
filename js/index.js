@@ -57,8 +57,13 @@ class Board {
             for(let col = 0; col < 8; ++col) {
                 const color = (row%2 === col%2) ? "light" : "dark";
                 let piece = null;
-                if(row == 1 && col == 5) {
-                    piece = new Pawn("white");
+                switch(DEFAULT_BOARD[row][col]) {
+                    case "P":
+                        piece = new Pawn("white");
+                        break;
+                    case "p":
+                        piece = new Pawn("black");
+                        break;
                 }
                 rowArr.push(new Square(color, piece));
             }
