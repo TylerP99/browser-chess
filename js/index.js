@@ -36,6 +36,8 @@ class Player {
     constructor(color = "white") {
         this.color = color;
     }
+
+    takeTurn() {}
 }
 
 class Board {
