@@ -25,27 +25,41 @@ const DEFAULT_BOARD = [
 class ChessGame {
     // Contains game meta data (for now, turn info and board info, control of main game loop)
     constructor() {
+        this.players = [new Player("white", "Player 1"), new Player("black", "Player 2")];
         this.board = new Board();
         this.turn = "White";
         this.turnNum = 0;
-        this.turnHistory;
+        //this.turnHistory;
+
+        this.gameLoop();
+    }
+
+    gameLoop() {
+        // White takes turn
+        // Check black checks
+        // Black takes turn
+        // Check white checks
+        // Continue until checkmate
     }
 }
 
 class Player {
-    constructor(color = "white") {
+    constructor(color = "white", name = "Player") {
         this.color = color;
+        this.name = name;
     }
 
-    takeTurn() {}
+    takeTurn() {
+        // Player moves a piece
+    }
 }
 
 class Board {
     // Contains piece information, controls what can move and where
-    constructor() {
-        this.data = []
+    constructor(boardArray = DEFAULT_BOARD) {
+        this.data = boardArray
 
-        this.board = this.generate();
+        this.board = this.generate(boardArray);
 
         this.display = this.render();
     }
@@ -59,7 +73,7 @@ class Board {
             for(let col = 0; col < 8; ++col) {
                 const color = (row%2 === col%2) ? "light" : "dark";
                 let piece = null;
-                switch(DEFAULT_BOARD[row][col]) {
+                switch(boardString[row][col]) {
                     case "P":
                         piece = new Pawn("white");
                         break;
@@ -72,7 +86,6 @@ class Board {
             board.push(rowArr);
         }
 
-        console.log(board);
         return board;
     }
 
@@ -98,6 +111,7 @@ class Board {
         const piece = this.board[target.row][target.col];
 
         // TODO: Verify move
+        // TODO: Verify move doesnt put own piece in check
 
         this.board[target.row][target.col] = null;
 
@@ -207,4 +221,4 @@ class King {
     constructor() {}
 }
 
-const board = new Board();
+const game = new ChessGame();
