@@ -80,6 +80,36 @@ class Board {
                     case "p":
                         piece = new Pawn("black");
                         break;
+                    case "R":
+                        piece = new Rook("white");
+                        break;
+                    case "r":
+                        piece = new Rook("black");
+                        break;
+                    case "N":
+                        piece = new Knight("white");
+                        break;
+                    case "n":
+                        piece = new Knight("black");
+                        break;
+                    case "B":
+                        piece = new Bishop("white");
+                        break;
+                    case "b":
+                        piece = new Bishop("black");
+                        break;
+                    case "Q":
+                        piece = new Queen("white");
+                        break;
+                    case "q":
+                        piece = new Queen("black");
+                        break;
+                    case "K":
+                        piece = new King("white");
+                        break;
+                    case "k":
+                        piece = new King("black");
+                        break;
                 }
                 rowArr.push(new Square(color, piece));
             }
@@ -108,14 +138,19 @@ class Board {
     }
 
     move(target, destination) {
-        const piece = this.board[target.row][target.col];
+        const piece = this.board[target.row][target.col].piece;
+        const pieceData = this.data[target.row][target.col];
 
         // TODO: Verify move
         // TODO: Verify move doesnt put own piece in check
 
-        this.board[target.row][target.col] = null;
+        this.board[target.row][target.col].piece = null;
+        this.data[target.row][target.col] = " ";
 
-        this.board[destination.row][destination.col] = piece;
+        this.board[destination.row][destination.col].piece = piece;
+        this.data[destination.row][destination.col] = pieceData;
+
+        this.render();
 
         return true;
     }
@@ -202,23 +237,123 @@ class Pawn {
 }
 
 class Knight {
-    constructor() {}
+    constructor(color = "white") {
+        this.color = color
+        this.display = this.generate();
+    }
+
+    generate() {
+        const image = document.createElement("img");
+        image.classList.add("piece");
+        if(this.color == "white") {
+            image.src = "./assets/knight-white.svg";
+        }
+        else {
+            image.src = "./assets/knight-black.svg";
+        }
+
+        return image;
+    }
+
+    getDisplay() {
+        return this.display;
+    }
 }
 
 class Bishop {
-    constructor() {}
+    constructor(color = "white") {
+        this.color = color
+        this.display = this.generate();
+    }
+
+    generate() {
+        const image = document.createElement("img");
+        image.classList.add("piece");
+        if(this.color == "white") {
+            image.src = "./assets/bishop-white.svg";
+        }
+        else {
+            image.src = "./assets/bishop-black.svg";
+        }
+
+        return image;
+    }
+
+    getDisplay() {
+        return this.display;
+    }
 }
 
 class Rook {
-    constructor() {}
+    constructor(color = "white") {
+        this.color = color
+        this.display = this.generate();
+    }
+
+    generate() {
+        const image = document.createElement("img");
+        image.classList.add("piece");
+        if(this.color == "white") {
+            image.src = "./assets/rook-white.svg";
+        }
+        else {
+            image.src = "./assets/rook-black.svg";
+        }
+
+        return image;
+    }
+
+    getDisplay() {
+        return this.display;
+    }
 }
 
 class Queen {
-    constructor() {}
+    constructor(color = "white") {
+        this.color = color
+        this.display = this.generate();
+    }
+
+    generate() {
+        const image = document.createElement("img");
+        image.classList.add("piece");
+        if(this.color == "white") {
+            image.src = "./assets/queen-white.svg";
+        }
+        else {
+            image.src = "./assets/queen-black.svg";
+        }
+
+        return image;
+    }
+
+    getDisplay() {
+        return this.display;
+    }
 }
 
 class King {
-    constructor() {}
+    constructor(color = "white") {
+        this.color = color
+        this.display = this.generate();
+    }
+
+    generate() {
+        const image = document.createElement("img");
+        image.classList.add("piece");
+        if(this.color == "white") {
+            image.src = "./assets/king-white.svg";
+        }
+        else {
+            image.src = "./assets/king-black.svg";
+        }
+
+        return image;
+    }
+
+    getDisplay() {
+        return this.display;
+    }
 }
 
 const game = new ChessGame();
