@@ -120,6 +120,7 @@ class Board {
     }
 
     render() {
+        console.log(this.board);
         const container = document.createElement("div");
         container.classList.add("board");
 
@@ -127,12 +128,15 @@ class Board {
             const rowContainer = document.createElement("div");
             rowContainer.classList.add("row");
             for(let col = 0; col < 8; ++col) {
+                //console.log("Row", row, "Col", col, this.board[row][col]);
                 rowContainer.appendChild(this.board[row][col].getDisplay());
             }
             container.appendChild(rowContainer);
         }
 
         document.querySelector("#board-container").appendChild(container);
+
+        console.log(container);
 
         return container;
     }
@@ -146,9 +150,13 @@ class Board {
 
         this.board[target.row][target.col].piece = null;
         this.data[target.row][target.col] = " ";
+        this.board[target.row][target.col].generate();
+        console.log(this.board[target.row][target.col].getDisplay())
 
         this.board[destination.row][destination.col].piece = piece;
         this.data[destination.row][destination.col] = pieceData;
+        this.board[destination.row][destination.col].generate();
+        console.log(this.board[destination.row][destination.col].getDisplay());
 
         this.render();
 
