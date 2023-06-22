@@ -57,8 +57,6 @@ class Player {
 class Board {
     // Contains piece information, controls what can move and where
     constructor(boardArray = DEFAULT_BOARD) {
-        this.data = boardArray
-
         this.board = this.generate(boardArray);
 
         this.display = this.render();
@@ -143,22 +141,13 @@ class Board {
 
     move(target, destination) {
         const piece = this.board[target.row][target.col].piece;
-        const pieceData = this.data[target.row][target.col];
 
         // TODO: Verify move
         // TODO: Verify move doesnt put own piece in check
 
-        this.board[target.row][target.col].piece = null;
-        this.data[target.row][target.col] = " ";
-        this.board[target.row][target.col].generate();
-        console.log(this.board[target.row][target.col].getDisplay())
+        this.board[target.row][target.col].setPiece(null);
 
-        this.board[destination.row][destination.col].piece = piece;
-        this.data[destination.row][destination.col] = pieceData;
-        this.board[destination.row][destination.col].generate();
-        console.log(this.board[destination.row][destination.col].getDisplay());
-
-        this.render();
+        this.board[destination.row][destination.col].setPiece(piece);
 
         return true;
     }
@@ -186,6 +175,30 @@ class Square {
 
     getDisplay() {
         return this.display;
+    }
+
+    setPiece(piece) {
+        console.log(this.display);
+        if(this.piece) {
+            this.display.removeChild(this.display.firstChild);
+        }
+
+        if(!piece) {
+            this.piece = null;
+        }
+        else {
+            this.piece = piece;
+            this.display.appendChild(this.piece.getDisplay());
+        }
+
+        return true;
+    }
+}
+
+class Move {
+    constructor(rank, file) {
+        this.rank = rank; // Row
+        this.file = file; // Col
     }
 }
 
@@ -313,6 +326,48 @@ class Rook {
 
     getDisplay() {
         return this.display;
+    }
+
+    calculateValidMoves(rank, file, board) {
+        const moves = [];
+
+        // Up
+        for(let i = rank + 1; i < board.length && (!board[i][file].piece || board[i][file].piece.color !== this.color); ++i) {
+            moves.push(new Move(i, file));
+
+            if(board[i][file].piece && (board[i][file].piece.color !== this.color)) {
+                break;
+            }
+        }
+
+        // Down
+        for(let i = rank - 1; i >= 0 && (!board[i][file].piece || board[i][file].piece.color !== this.color); --i) {
+            moves.push(new Move(i, file));
+
+            if(board[i][file].piece && (board[i][file].piece.color !== this.color)) {
+                break;
+            }
+        }
+
+        // Left
+        for(let i = file - 1; i >= 0 && (!board[rank][i].piece || board[rank][i].piece.color !== this.color); --i) {
+            moves.push(new Move(rank, i));
+
+            if(board[rank][i].piece && (board[rank][i].piece.color !== this.color)) {
+                break;
+            }
+        }
+
+        // Right
+        for(let i = file + 1; i < board[0].length && (!board[rank][i].piece || board[rank][i].piece.color !== this.color); ++i) {
+            moves.push(new Move(rank, i));
+
+            if(board[rank][i].piece && (board[rank][i].piece.color !== this.color)) {
+                break;
+            }
+        }
+
+        return moves;
     }
 }
 
