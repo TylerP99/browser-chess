@@ -303,6 +303,64 @@ class Bishop {
     getDisplay() {
         return this.display;
     }
+
+    calculateValidMoves(rank, file, board) {
+        const moves = [];
+
+        // Up left
+        for(let i = rank - 1, j = file - 1;
+            i >= 0 && j >= 0 && (!board[i][j].piece || board[i][j].piece.color !== this.color);
+            --i, --j) {
+
+            moves.push(new Move(i,j));
+
+            if(board[i][j].piece && board[i][j].piece.color !== this.color) {
+                break;
+            }
+            
+        }
+
+        // Up right
+        for(let i = rank - 1, j = file + 1;
+            i >= 0 && j < board[0].length && (!board[i][j].piece || board[i][j].piece.color !== this.color);
+            --i, ++j) {
+
+            moves.push(new Move(i,j));
+
+            if(board[i][j].piece && board[i][j].piece.color !== this.color) {
+                break;
+            }
+            
+        }
+
+        // Down left
+        for(let i = rank + 1, j = file - 1;
+            i < board.length && j >= 0 && (!board[i][j].piece || board[i][j].piece.color !== this.color);
+            ++i, --j) {
+
+            moves.push(new Move(i,j));
+
+            if(board[i][j].piece && board[i][j].piece.color !== this.color) {
+                break;
+            }
+            
+        }
+
+        // Down right
+        for(let i = rank + 1, j = file + 1;
+            i < board.length && j < board[0].length && (!board[i][j].piece || board[i][j].piece.color !== this.color);
+            ++i, ++j) {
+
+            moves.push(new Move(i,j));
+
+            if(board[i][j].piece && board[i][j].piece.color !== this.color) {
+                break;
+            }
+            
+        }
+
+        return moves;
+    }
 }
 
 class Rook {
