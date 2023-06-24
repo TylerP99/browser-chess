@@ -501,6 +501,100 @@ class Queen {
     getDisplay() {
         return this.display;
     }
+
+    calculateValidMoves(rank, file, board) {
+        const moves = [];
+
+        // Up
+        for(let i = rank + 1; i < board.length && (!board[i][file].piece || board[i][file].piece.color !== this.color); ++i) {
+            moves.push(new Move(i, file));
+
+            if(board[i][file].piece && (board[i][file].piece.color !== this.color)) {
+                break;
+            }
+        }
+
+        // Down
+        for(let i = rank - 1; i >= 0 && (!board[i][file].piece || board[i][file].piece.color !== this.color); --i) {
+            moves.push(new Move(i, file));
+
+            if(board[i][file].piece && (board[i][file].piece.color !== this.color)) {
+                break;
+            }
+        }
+
+        // Left
+        for(let i = file - 1; i >= 0 && (!board[rank][i].piece || board[rank][i].piece.color !== this.color); --i) {
+            moves.push(new Move(rank, i));
+
+            if(board[rank][i].piece && (board[rank][i].piece.color !== this.color)) {
+                break;
+            }
+        }
+
+        // Right
+        for(let i = file + 1; i < board[0].length && (!board[rank][i].piece || board[rank][i].piece.color !== this.color); ++i) {
+            moves.push(new Move(rank, i));
+
+            if(board[rank][i].piece && (board[rank][i].piece.color !== this.color)) {
+                break;
+            }
+        }
+
+        // Up left
+        for(let i = rank - 1, j = file - 1;
+            i >= 0 && j >= 0 && (!board[i][j].piece || board[i][j].piece.color !== this.color);
+            --i, --j) {
+
+            moves.push(new Move(i,j));
+
+            if(board[i][j].piece && board[i][j].piece.color !== this.color) {
+                break;
+            }
+            
+        }
+
+        // Up right
+        for(let i = rank - 1, j = file + 1;
+            i >= 0 && j < board[0].length && (!board[i][j].piece || board[i][j].piece.color !== this.color);
+            --i, ++j) {
+
+            moves.push(new Move(i,j));
+
+            if(board[i][j].piece && board[i][j].piece.color !== this.color) {
+                break;
+            }
+            
+        }
+
+        // Down left
+        for(let i = rank + 1, j = file - 1;
+            i < board.length && j >= 0 && (!board[i][j].piece || board[i][j].piece.color !== this.color);
+            ++i, --j) {
+
+            moves.push(new Move(i,j));
+
+            if(board[i][j].piece && board[i][j].piece.color !== this.color) {
+                break;
+            }
+            
+        }
+
+        // Down right
+        for(let i = rank + 1, j = file + 1;
+            i < board.length && j < board[0].length && (!board[i][j].piece || board[i][j].piece.color !== this.color);
+            ++i, ++j) {
+
+            moves.push(new Move(i,j));
+
+            if(board[i][j].piece && board[i][j].piece.color !== this.color) {
+                break;
+            }
+            
+        }
+
+        return moves;
+    }
 }
 
 class King {
@@ -524,6 +618,49 @@ class King {
 
     getDisplay() {
         return this.display;
+    }
+
+    calculateValidMoves(rank, file, board) {
+        const moves = [];
+        
+        if(rank + 1 < board.length) {
+            if(!board[rank+1][file].piece || board[rank+1][file].piece.color !== this.color) {
+                moves.push(new Move(rank+1, file));
+            }
+
+            if(file - 1 >= 0 && (!board[rank+1][file-1].piece || board[rank+1][file-1].piece.color !== this.color)) {
+                moves.push(new Move(rank+1, file-1));
+            }
+    
+            if(file + 1 < board[0].length && (!board[rank+1][file+1].piece || board[rank+1][file+1].piece.color !== this.color)) {
+                moves.push(new Move(rank+1, file+1));
+            }
+        }
+
+        if(rank - 1 >= 0) {
+            if(!board[rank-1][file].piece || board[rank-1][file].piece.color !== this.color) {
+                moves.push(new Move(rank-1, file));
+            }
+
+            if(file - 1 >= 0 && (!board[rank-1][file-1].piece || board[rank-1][file-1].piece.color !== this.color)) {
+                moves.push(new Move(rank-1, file+1));
+            }
+    
+            if(file + 1 < board[0].length && (!board[rank-1][file+1].piece || board[rank-1][file+1].piece.color !== this.color)) {
+                moves.push(new Move(rank-1, file+1));
+            }
+        }
+
+        console.log(board[rank][file-1].piece)
+        if(file - 1 >= 0 && (!board[rank][file-1].piece || board[rank][file-1].piece.color !== this.color)) {
+            moves.push(new Move(rank, file-1));
+        }
+
+        if(file + 1 < board[0].length && (!board[rank][file+1].piece || board[rank][file+1].piece.color !== this.color)) {
+            moves.push(new Move(rank, file+1));
+        }
+
+        return moves;
     }
 }
 
