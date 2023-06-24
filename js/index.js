@@ -252,6 +252,10 @@ class Pawn {
             moves.push({x:x-1, y:y+1*direction});
         }
 
+        // En Pessant
+
+        // Promotion
+
         return moves;
     }
 
@@ -278,6 +282,52 @@ class Knight {
 
     getDisplay() {
         return this.display;
+    }
+
+    calculateValidMoves(rank, file, board) {
+        const moves = [];
+
+        //Up
+        if(rank - 2 >= 0) {
+            if(file - 1 >= 0) {
+                moves.push(new Move(rank - 2, file - 1));
+            }
+            if(file + 1 < board[0].length) {
+                moves.push(new Move(rank - 2, file + 1));
+            }
+        }
+
+        // Down
+        if(rank + 2 < board.length) {
+            if(file - 1 >= 0) {
+                moves.push(new Move(rank + 2, file - 1));
+            }
+            if(file + 1 < board[0].length) {
+                moves.push(new Move(rank + 2, file + 1));
+            }
+        }
+
+        // Left
+        if(file - 2 >= 0) {
+            if(rank - 1 >= 0) {
+                moves.push(new Move(rank - 1, file - 2));
+            }
+            if(rank + 1 < board.length) {
+                moves.push(new Move(rank + 1, file - 2));
+            }
+        }
+
+        // Right
+        if(file + 2 < board[0].length) {
+            if(rank - 1 >= 0) {
+                moves.push(new Move(rank - 1, file + 2));
+            }
+            if(rank + 1 < board.length) {
+                moves.push(new Move(rank + 1, file + 2));
+            }
+        }
+
+        return moves;
     }
 }
 
