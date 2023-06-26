@@ -170,6 +170,8 @@ class Square {
             container.appendChild(content);
         }
 
+        container.addEventListener("click", this.toggleHighlight.bind(this));
+
         return container;
     }
 
@@ -192,6 +194,10 @@ class Square {
         }
 
         return true;
+    }
+
+    toggleHighlight() {
+        this.display.classList.toggle("highlight");
     }
 }
 
