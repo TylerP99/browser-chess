@@ -151,6 +151,14 @@ class Board {
 
         return true;
     }
+
+    showValidMoves() {
+
+    }
+    
+    clearMoveHighlight() {
+        
+    }
 }
 
 class Square {
