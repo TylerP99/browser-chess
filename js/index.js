@@ -118,7 +118,6 @@ class Board {
     }
 
     render() {
-        console.log(this.board);
         const container = document.createElement("div");
         container.classList.add("board");
 
@@ -128,13 +127,12 @@ class Board {
             for(let col = 0; col < 8; ++col) {
                 //console.log("Row", row, "Col", col, this.board[row][col]);
                 rowContainer.appendChild(this.board[row][col].getDisplay());
+                this.board[row][col].getDisplay().addEventListener("click", this.logSquareCoordinates.bind(this));
             }
             container.appendChild(rowContainer);
         }
 
         document.querySelector("#board-container").appendChild(container);
-
-        console.log(container);
 
         return container;
     }
@@ -152,12 +150,16 @@ class Board {
         return true;
     }
 
-    showValidMoves() {
+    logSquareCoordinates(e) {
+        console.log(e);
+        console.log(this);
+    }
 
+    showValidMoves() {
     }
     
     clearMoveHighlight() {
-        
+
     }
 }
 
@@ -178,7 +180,7 @@ class Square {
             container.appendChild(content);
         }
 
-        container.addEventListener("click", this.toggleHighlight.bind(this));
+        container.addEventListener("contextmenu", this.toggleHighlight.bind(this));
 
         return container;
     }
@@ -204,7 +206,8 @@ class Square {
         return true;
     }
 
-    toggleHighlight() {
+    toggleHighlight(e) {
+        e.preventDefault();
         this.display.classList.toggle("highlight");
     }
 }
