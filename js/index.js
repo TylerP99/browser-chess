@@ -65,13 +65,13 @@ class Board {
     generate(boardString) {
         const board = [];
 
-        for(let row = 0; row < 8; ++row) {
-            const rowArr = [];
+        for(let rank = 0; rank < 8; ++rank) {
+            const rankArr = [];
 
-            for(let col = 0; col < 8; ++col) {
-                const color = (row%2 === col%2) ? "light" : "dark";
+            for(let file = 0; file < 8; ++file) {
+                const color = (rank%2 === file%2) ? "light" : "dark";
                 let piece = null;
-                switch(boardString[row][col]) {
+                switch(boardString[rank][file]) {
                     case "P":
                         piece = new Pawn("white");
                         break;
@@ -109,9 +109,9 @@ class Board {
                         piece = new King("black");
                         break;
                 }
-                rowArr.push(new Square(color, piece));
+                rankArr.push(new Square(rank, file, color, piece));
             }
-            board.push(rowArr);
+            board.push(rankArr);
         }
 
         return board;
@@ -127,7 +127,7 @@ class Board {
             for(let col = 0; col < 8; ++col) {
                 //console.log("Row", row, "Col", col, this.board[row][col]);
                 rowContainer.appendChild(this.board[row][col].getDisplay());
-                this.board[row][col].getDisplay().addEventListener("click", this.logSquareCoordinates.bind(this));
+                this.board[row][col].getDisplay().addEventListener("click", this.board[row][col].logSquareCoordinates.bind(this.board[row][col]));
             }
             container.appendChild(rowContainer);
         }
@@ -150,11 +150,6 @@ class Board {
         return true;
     }
 
-    logSquareCoordinates(e) {
-        console.log(e);
-        console.log(this);
-    }
-
     showValidMoves() {
     }
     
@@ -164,7 +159,10 @@ class Board {
 }
 
 class Square {
-    constructor(color = "light", piece = null) {
+    constructor(x, y, color = "light", piece = null) {
+        this.X = x;
+        this.Y = y;
+
         this.color = color;
         this.piece = piece;
 
@@ -209,6 +207,10 @@ class Square {
     toggleHighlight(e) {
         e.preventDefault();
         this.display.classList.toggle("highlight");
+    }
+
+    logSquareCoordinates(e) {
+        console.log(this.X, this.Y)
     }
 }
 
