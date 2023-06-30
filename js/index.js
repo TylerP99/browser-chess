@@ -158,6 +158,20 @@ class Board {
     }
 }
 
+class Move {
+    constructor(start, end, piece) {
+        this.start = start;
+        this.end = end;
+        this.piece = piece;
+
+        this.notation = calcNotation();
+    }
+
+    calcNotation() {
+        return "TODO";
+    }
+}
+
 class Square {
     constructor(x, y, color = "light", piece = null) {
         this.X = x;
