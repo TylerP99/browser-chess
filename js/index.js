@@ -22,6 +22,16 @@ const DEFAULT_BOARD = [
     [ "r", "n", "b", "q", "k", "b", "n", "r"], // 8
 ]
 
+class Table {
+    constructor() {
+        this.game;
+        this.score = [0,0];
+    }
+
+    startGame() {
+    }
+}
+
 class ChessGame {
     // Contains game meta data (for now, turn info and board info, control of main game loop)
     constructor() {
