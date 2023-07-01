@@ -35,11 +35,17 @@ class ChessGame {
     }
 
     gameLoop() {
+        // Initialize game
+        // - Set board to default
+    
         // White takes turn
         // Check black checks
         // Black takes turn
         // Check white checks
         // Continue until checkmate
+
+        // Add outcome to score counter
+        // Ask for a new game
     }
 }
 
